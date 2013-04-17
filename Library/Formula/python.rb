@@ -22,6 +22,7 @@ class Python < Formula
   option 'with-poll', 'Enable select.poll, which is not fully implemented on OS X (http://bugs.python.org/issue5154)'
 
   # It seems this is not available yet for 2.7.4 - I commented it out until the upstream issue gets updated --sam
+  # When fixed, uncomment the line in patches that adds the DTrace patch
   # --with-dtrace relies on CLT as dtrace hard-codes paths to /usr
   #option 'with-dtrace', 'Experimental DTrace support (http://bugs.python.org/issue13405)' if MacOS::CLT.installed?
 
@@ -34,7 +35,7 @@ class Python < Formula
 
   def patches
     p = []
-    p << 'https://raw.github.com/gist/3415636/2365dea8dc5415daa0148e98c394345e1191e4aa/pythondtrace-patch.diff' if build.include? 'with-dtrace'
+    #p << 'https://raw.github.com/gist/3415636/2365dea8dc5415daa0148e98c394345e1191e4aa/pythondtrace-patch.diff' if build.include? 'with-dtrace'
     # Patch to disable the search for Tk.frameworked, since homebrew's Tk is
     # a plain unix build. Remove `-lX11`, too because our Tk is "AquaTk".
     p << DATA if build.include? 'with-brewed-tk'
